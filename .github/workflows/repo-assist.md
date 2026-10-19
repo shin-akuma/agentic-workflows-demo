@@ -223,21 +223,9 @@ steps:
       MEMORY_DIR: /tmp/gh-aw/repo-memory/default
     run: |
       if [[ ! -f "$MEMORY_DIR/notes.json" ]]; then
-        cat > "$MEMORY_DIR/notes.json" <<'EOF'
-      {
-        "version": 1,
-        "cursors": {
-          "labelling_after": null,
-          "investigation_after": null
-        },
-        "issues": [],
-        "fixes": [],
-        "checks": [],
-        "completed_actions": [],
-        "priorities": []
-      }
-      EOF
+        jq -n '{version: 1, cursors: {labelling_after: null, investigation_after: null}, issues: [], fixes: [], checks: [], completed_actions: [], priorities: []}' > "$MEMORY_DIR/notes.json"
       fi
+      jq empty "$MEMORY_DIR/notes.json"
 
   - name: Fetch repo data for task weighting
     env:

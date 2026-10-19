@@ -10,8 +10,11 @@ permissions:
 engine: copilot
 timeout-minutes: 10
 tools:
+  bash: false
+  cli-proxy: false
   github:
     toolsets: [repos, issues, pull_requests]
+    min-integrity: none
 safe-outputs:
   add-comment:
     max: 1
